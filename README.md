@@ -8,17 +8,17 @@
  
 界面如下：
 
-![闪屏](https://github.com/mofada/FDRead/blob/master/images/splash.png "闪屏")  
-![书架](https://github.com/mofada/FDRead/blob/master/images/shelf.png "书架") 
-![菜单](https://github.com/mofada/FDRead/blob/master/images/menu.png "菜单")  
+![闪屏](https://github.com/mofada/FDRead/blob/master/images/splash.png "闪屏")
+![书架](https://github.com/mofada/FDRead/blob/master/images/shelf.png "书架")
+![菜单](https://github.com/mofada/FDRead/blob/master/images/menu.png "菜单")
 
-![个人中心](https://github.com/mofada/FDRead/blob/master/images/user.png "个人中心")  
-![讨论](https://github.com/mofada/FDRead/blob/master/images/discuss.png "讨论") 
+![个人中心](https://github.com/mofada/FDRead/blob/master/images/user.png "个人中心")
+![讨论](https://github.com/mofada/FDRead/blob/master/images/discuss.png "讨论")
 ![搜索](https://github.com/mofada/FDRead/blob/master/images/search.png "搜索")
 
-![书城](https://github.com/mofada/FDRead/blob/master/images/store.png "书城") 
-![分类](https://github.com/mofada/FDRead/blob/master/images/channel.png "分类") 
+![书城](https://github.com/mofada/FDRead/blob/master/images/store.png "书城")
+![分类](https://github.com/mofada/FDRead/blob/master/images/channel.png "分类")
 ![排行榜](https://github.com/mofada/FDRead/blob/master/images/ranking.png "排行榜")
 
-![书籍详情](https://github.com/mofada/FDRead/blob/master/images/detail.png "书籍详情")  
+![书籍详情](https://github.com/mofada/FDRead/blob/master/images/detail.png "书籍详情")
 ![阅读](https://github.com/mofada/FDRead/blob/master/images/read.png "阅读")
