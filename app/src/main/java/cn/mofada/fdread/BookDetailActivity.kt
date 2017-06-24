@@ -120,6 +120,11 @@ class BookDetailActivity : AppCompatActivity() {
         bindService(intent, connection, Context.BIND_AUTO_CREATE)
     }
 
+    override fun onResume() {
+        super.onResume()
+        adapter?.notifyDataSetChanged()
+    }
+
     private fun checkSave() {
         val chapters: List<Chapter> = DataSupport.where("list = '${book?.bookId}'").find(Chapter::class.java)
 
