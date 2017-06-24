@@ -100,9 +100,15 @@ interface FDReadServices {
     @GET("/fdread/db/discuss_insert.php")
     fun discuss_insert(@Query("discuss") discuss: String): Call<Line>
 
+    /**
+     * 获取所有讨论
+     */
     @GET("/fdread/db/discuss_query.php")
     fun discuss_query(): Call<List<Discuss>>
 
+    /**
+     * 获取广播/通知
+     */
     @GET("/fdread/notification.php")
     fun  notification(): Call<Line>
 }
