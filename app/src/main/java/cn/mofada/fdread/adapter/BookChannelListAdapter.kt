@@ -7,12 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import cn.mofada.fdread.R
-import cn.mofada.fdread.bean.Chapter
+import cn.mofada.fdread.bean.Book
 
 /**
  * Created by fada on 2017/6/11.
  */
-class BookChapterAdapter(var data: List<Chapter>) : RecyclerView.Adapter<BookChapterAdapter.ViewHolder>() {
+class BookChannelListAdapter(var data: List<Book>) : RecyclerView.Adapter<BookChannelListAdapter.ViewHolder>() {
     var mContext: Context? = null
     var listener: OnItemClickListener? = null
 
@@ -22,43 +22,41 @@ class BookChapterAdapter(var data: List<Chapter>) : RecyclerView.Adapter<BookCha
         if (mContext == null) {
             mContext = parent?.context
         }
-        var view: View = LayoutInflater.from(mContext).inflate(R.layout.item_list_chapter, parent, false)
+        val view: View = LayoutInflater.from(mContext).inflate(R.layout.item_list_channel_book, parent, false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-        val chapter: Chapter = data.get(position)
-        holder?.title?.text = chapter.title
+        val book: Book = data.get(position)
+        holder?.time?.text = book.time
+        holder?.title_author?.text = "${book.title}/${book.author}"
+        holder?.update?.text = book.update_
         if (holder != null) {
             setItemEvents(holder)
         }
     }
 
     class ViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
-        var title: TextView? = itemView?.findViewById(R.id.item_list_title)
+        var time: TextView? = itemView?.findViewById(R.id.item_list_time)
+        var title_author: TextView? = itemView?.findViewById(R.id.item_list_title_author)
+        var update: TextView? = itemView?.findViewById(R.id.item_list_update)
     }
 
-    fun listener(listener: OnItemClickListener): BookChapterAdapter {
+    fun listener(listener: OnItemClickListener) {
         this.listener = listener
-        return this
     }
 
-    fun refresh(data: List<Chapter>) {
+    fun refresh(data: List<Book>) {
         this.data = data
-        notifyDataSetChanged()
-    }
-
-    fun reversed() {
-        data = data.reversed()
         notifyDataSetChanged()
     }
 
     fun setItemEvents(holder: ViewHolder) {
         if (listener != null) {
-            holder.itemView.setOnClickListener(View.OnClickListener {
+            holder.itemView.setOnClickListener {
                 val layoutPosition = holder.getLayoutPosition()
                 listener?.onItemClick(holder.itemView, layoutPosition)
-            })
+            }
         }
     }
 }

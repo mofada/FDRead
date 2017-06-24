@@ -2,9 +2,9 @@
 <android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_margin="5dp"
     android:orientation="vertical"
     app:cardCornerRadius="5dp">
@@ -15,9 +15,9 @@
         android:orientation="horizontal"
         android:padding="5dp">
 
-        <de.hdodenhof.circleimageview.CircleImageView
+        <ImageView
             android:id="@+id/item_list_image"
-            android:layout_width="90dp"
+            android:layout_width="80dp"
             android:layout_height="100dp"
             android:layout_margin="5dp"
             android:scaleType="centerCrop"
@@ -26,26 +26,33 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/item_list_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:text="玄幻小说"
                 android:textSize="16sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                tools:text="一念永恒"/>
 
             <TextView
-                android:lineSpacingExtra="3dp"
-                android:id="@+id/item_list_description"
+                android:id="@+id/item_list_author_type"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                tools:text="耳根/玄幻小说"/>
+
+            <TextView
+                android:id="@+id/item_list_intro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
                 android:ellipsize="end"
+                android:lineSpacingExtra="3dp"
                 android:maxLines="3"
                 android:scaleX="1.0"
-                tools:text="玄幻小说是一种类型小说，思想内容往往幽深玄妙、奇伟瑰丽。不受科学与人文的限制，也不受时空的限制，励志，热血，任凭作者想像力自由发挥。与科幻、奇幻、武侠等幻想性质浓厚的类型小说关系密切。"/>
+                tools:text="一念成沧海，一念化桑田。一念斩千魔，一念诛万仙。唯我念……永恒"/>
         </LinearLayout>
     </LinearLayout>
 

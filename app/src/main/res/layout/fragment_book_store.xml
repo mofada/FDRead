@@ -1,13 +1,41 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context="com.example.fada.fdread.fragment.BookStoreFragment">
+<cn.mofada.fdread.view.VerticalSwipeRefreshLayout
+    android:id="@+id/swipeRefresh"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="cn.mofada.fdread.fragment.BookStoreFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment"/>
+        android:orientation="vertical">
 
-</FrameLayout>
+        <include layout="@layout/layout_toolbar"/>
+
+        <include layout="@layout/layout_notice"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycleView_recommend"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </android.support.v7.widget.RecyclerView>
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycleView_channel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </android.support.v7.widget.RecyclerView>
+
+        <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="vertical">-->
+        <!--<include layout="@layout/item_list_channel"/>-->
+        <!--<include layout="@layout/item_list_channel"/>-->
+        <!--<include layout="@layout/item_list_channel"/>-->
+        <!--</LinearLayout>-->
+    </LinearLayout>
+</cn.mofada.fdread.view.VerticalSwipeRefreshLayout>

@@ -1,4 +1,4 @@
-package cn.fada.fdread;
+package cn.mofada.fdread;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

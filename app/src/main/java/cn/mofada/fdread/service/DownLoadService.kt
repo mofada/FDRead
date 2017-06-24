@@ -1,4 +1,4 @@
-package cn.mofada.fdread
+package cn.mofada.fdread.service
 
 import android.app.Service
 import android.content.Intent
@@ -6,18 +6,21 @@ import android.os.Binder
 import android.os.IBinder
 import cn.mofada.fdread.bean.Chapter
 import cn.mofada.fdread.retrofit.RetrofitServices
-import cn.mofada.fdread.utils.LogUtils
+import cn.mofada.fdread.utils.NotificationUtils
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class DownLoadService : Service() {
+    var count: Int = 0
+    var curr: Int = 0
+    var isDwon: Boolean = false
+
     inner class FDBinder : Binder() {
-        fun Download(chapter: Chapter?, order: Boolean = true) {
+        @Synchronized fun Download(chapters: List<Chapter>?, order: Boolean = true) {
             isOrder = order
-            if (chapter != null) {
-                getBookByChapterId(chapter.chapterId)
-            }
+            count = chapters?.size!!
+            getBookByChapterId(chapters[0].chapterId)
         }
     }
 
@@ -31,13 +34,14 @@ class DownLoadService : Service() {
     @Synchronized private fun getBookByChapterId(chapterId: String) {
         RetrofitServices.getInstance().getRetrofitAndGson().chapter(chapterId).enqueue(object : Callback<Chapter> {
             override fun onFailure(call: Call<Chapter>?, t: Throwable?) {
-                LogUtils.d("onFailure" + t?.message)
+                NotificationUtils.showNotification(this@DownLoadService, "缓存失败")
             }
 
             override fun onResponse(call: Call<Chapter>?, response: Response<Chapter>?) {
+                curr++
                 val chapter: Chapter = response?.body()!!
-                LogUtils.d("onResponse:" + chapter.toString())
-                chapter.saveOrUpdateAsync("chapterId = ${chapter.chapterId}")
+                chapter.saveOrUpdate("chapterId = '${chapter.chapterId}'")
+                NotificationUtils.showNotification(this@DownLoadService, "正在缓存：$curr/$count ${chapter.title}")
                 if (isOrder) {
                     if (!chapter.next.endsWith("/"))
                         getBookByChapterId(chapter.next)

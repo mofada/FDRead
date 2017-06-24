@@ -1,4 +1,4 @@
-package com.example.fada.fdread.view
+package cn.mofada.fdread.view
 
 import android.content.Context
 import android.support.v4.view.ViewPager

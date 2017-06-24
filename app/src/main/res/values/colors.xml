@@ -3,7 +3,18 @@
     <color name="colorBackground">#26C6DA</color>
     <color name="colorPrimary">@color/colorBackground</color>
     <color name="colorPrimaryDark">@color/colorBackground</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">@color/colorBackground</color>
     <color name="colorWhite">#FFFFFFFF</color>
-    <color name="colorGray">#66000000</color>
+    <color name="colorBlack">#66000000</color>
+    <color name="colorGray">#dfdff1</color>
+    <color name="colorBlackF">#FF000000</color>
+    <color name="colorLightGray">#F8F8F8</color>
+
+    <color name="read_theme_white">#F6F4EE</color>
+    <color name="read_theme_yellow">#e6dbbf</color>
+    <color name="read_theme_green">#BBCBBC</color>
+    <color name="read_theme_gray">#DBDAD8</color>
+    <color name="read_theme_five">#AAAAAA</color>
+    <color name="read_theme_night">#101010</color>
+    <color name="read_theme_night_text">#323431</color>
 </resources>

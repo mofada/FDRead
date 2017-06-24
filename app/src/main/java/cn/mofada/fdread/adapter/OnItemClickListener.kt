@@ -1,4 +1,4 @@
-package com.example.fada.fdread.adapter
+package cn.mofada.fdread.adapter
 
 import android.view.View
 
@@ -7,6 +7,4 @@ import android.view.View
  */
 interface OnItemClickListener {
     fun onItemClick(view: View, position: Int)
-
-    fun onItemLongClick(view: View, position: Int)
 }

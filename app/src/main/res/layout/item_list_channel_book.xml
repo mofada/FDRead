@@ -1,7 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:orientation="horizontal"
+    android:padding="10dp"
+    android:weightSum="1">
 
+    <TextView
+        android:id="@+id/item_list_time"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.15"
+        android:ellipsize="end"
+        android:maxLines="1"
+        tools:text="06-17"/>
+
+    <TextView
+        android:id="@+id/item_list_title_author"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.3"
+        android:ellipsize="end"
+        android:maxLines="1"
+        tools:text="星武通神/蒜书"/>
+
+    <TextView
+        android:id="@+id/item_list_update"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.55"
+        android:ellipsize="end"
+        android:maxLines="1"
+        tools:text="第四百五十八章登陆招式无用"/>
 </LinearLayout>

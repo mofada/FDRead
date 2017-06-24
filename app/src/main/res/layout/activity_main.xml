@@ -3,13 +3,15 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.fada.fdread.MainActivity">
+    tools:context="cn.mofada.fdread.MainActivity">
 
     <include layout="@layout/layout_main"/>
 
     <android.support.design.widget.NavigationView
+        android:id="@+id/navigationView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start"

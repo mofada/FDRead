@@ -7,12 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import cn.mofada.fdread.R
-import cn.mofada.fdread.bean.Chapter
+import cn.mofada.fdread.bean.Book
 
 /**
  * Created by fada on 2017/6/11.
  */
-class BookChapterAdapter(var data: List<Chapter>) : RecyclerView.Adapter<BookChapterAdapter.ViewHolder>() {
+class BookRankingAdapter(var data: List<Book>) : RecyclerView.Adapter<BookRankingAdapter.ViewHolder>() {
     var mContext: Context? = null
     var listener: OnItemClickListener? = null
 
@@ -22,13 +22,13 @@ class BookChapterAdapter(var data: List<Chapter>) : RecyclerView.Adapter<BookCha
         if (mContext == null) {
             mContext = parent?.context
         }
-        var view: View = LayoutInflater.from(mContext).inflate(R.layout.item_list_chapter, parent, false)
+        val view: View = LayoutInflater.from(mContext).inflate(R.layout.item_list_chapter, parent, false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-        val chapter: Chapter = data.get(position)
-        holder?.title?.text = chapter.title
+        val chapter: Book = data[position]
+        holder?.title?.text = "${chapter.title}/${chapter.type}"
         if (holder != null) {
             setItemEvents(holder)
         }
@@ -38,18 +38,12 @@ class BookChapterAdapter(var data: List<Chapter>) : RecyclerView.Adapter<BookCha
         var title: TextView? = itemView?.findViewById(R.id.item_list_title)
     }
 
-    fun listener(listener: OnItemClickListener): BookChapterAdapter {
+    fun listener(listener: OnItemClickListener) {
         this.listener = listener
-        return this
     }
 
-    fun refresh(data: List<Chapter>) {
+    fun refresh(data: List<Book>) {
         this.data = data
-        notifyDataSetChanged()
-    }
-
-    fun reversed() {
-        data = data.reversed()
         notifyDataSetChanged()
     }
 

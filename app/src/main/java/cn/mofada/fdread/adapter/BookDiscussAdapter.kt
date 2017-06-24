@@ -8,13 +8,13 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import cn.mofada.fdread.R
+import cn.mofada.fdread.bean.Discuss
 import com.bumptech.glide.Glide
-import cn.mofada.fdread.bean.Book
 
 /**
  * Created by fada on 2017/6/11.
  */
-class BookAdapter(var data: List<Book>) : RecyclerView.Adapter<BookAdapter.ViewHolder>() {
+class BookDiscussAdapter(var data: List<Discuss>) : RecyclerView.Adapter<BookDiscussAdapter.ViewHolder>() {
     var mContext: Context? = null
     var listener: OnItemClickListener? = null
 
@@ -24,15 +24,15 @@ class BookAdapter(var data: List<Book>) : RecyclerView.Adapter<BookAdapter.ViewH
         if (mContext == null) {
             mContext = parent?.context
         }
-        var view: View = LayoutInflater.from(mContext).inflate(R.layout.item_grid_book, parent, false)
+        var view: View = LayoutInflater.from(mContext).inflate(R.layout.item_list_discuss, parent, false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-        val book: Book = data.get(position)
-        holder?.title?.text = book.title
-        Glide.with(mContext).load(book.image).into(holder?.image)
-        holder?.update?.text = "更新至:${book.update}"
+        val discuss: Discuss = data.get(position)
+        holder?.title?.text = discuss.name
+        Glide.with(mContext).load(discuss.iconurl).into(holder?.image)
+        holder?.content?.text = discuss.content
         if (holder != null) {
             setItemEvents(holder)
         }
@@ -40,12 +40,12 @@ class BookAdapter(var data: List<Book>) : RecyclerView.Adapter<BookAdapter.ViewH
 
 
     class ViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
-        var title: TextView? = itemView?.findViewById(R.id.item_grid_title)
-        var image: ImageView? = itemView?.findViewById(R.id.item_grid_image)
-        var update: TextView? = itemView?.findViewById(R.id.item_grid_update)
+        var title: TextView? = itemView?.findViewById(R.id.item_list_title)
+        var image: ImageView? = itemView?.findViewById(R.id.item_list_image)
+        var content: TextView? = itemView?.findViewById(R.id.item_list_intro)
     }
 
-    fun listener(listener: OnItemClickListener): BookAdapter {
+    fun listener(listener: OnItemClickListener): BookDiscussAdapter {
         this.listener = listener
         return this
     }
@@ -56,12 +56,11 @@ class BookAdapter(var data: List<Book>) : RecyclerView.Adapter<BookAdapter.ViewH
                 val layoutPosition = holder.getLayoutPosition()
                 listener?.onItemClick(holder.itemView, layoutPosition)
             })
-
-            holder.itemView.setOnLongClickListener(View.OnLongClickListener {
-                val layoutPosition = holder.getLayoutPosition()
-                listener?.onItemLongClick(holder.itemView, layoutPosition)
-                false
-            })
         }
+    }
+
+    fun  refresh(data: List<Discuss>) {
+        this.data = data
+        notifyDataSetChanged()
     }
 }

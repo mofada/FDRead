@@ -1,4 +1,4 @@
-package com.example.fada.fdread;
+package cn.mofada.fdread;
 
 import org.junit.Test;
 

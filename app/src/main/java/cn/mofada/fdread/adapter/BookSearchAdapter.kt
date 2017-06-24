@@ -8,52 +8,61 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import cn.mofada.fdread.R
-import cn.mofada.fdread.bean.Channel
+import cn.mofada.fdread.bean.Book
 import com.bumptech.glide.Glide
 
 /**
  * Created by fada on 2017/6/11.
  */
-class BookChannelAdapter(var context: Context) : RecyclerView.Adapter<BookChannelAdapter.ViewHolder>() {
+class BookSearchAdapter(var data: List<Book>) : RecyclerView.Adapter<BookSearchAdapter.ViewHolder>() {
     var mContext: Context? = null
-    var channels: ArrayList<Channel> = getChannel()
+    var listener: OnItemClickListener? = null
 
-    override fun getItemCount(): Int = channels.size
+    override fun getItemCount(): Int = data.size
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
         if (mContext == null) {
             mContext = parent?.context
         }
-        var view: View = LayoutInflater.from(mContext).inflate(R.layout.item_list_channel, parent, false)
+        val view: View = LayoutInflater.from(mContext).inflate(R.layout.item_list_search, parent, false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-        val channel: Channel = channels.get(position)
-        holder?.title?.text = channel.title
-        Glide.with(mContext).load(channel.cover).into(holder?.image)
-        holder?.description?.text = channel.descriptor
+        val book: Book = data.get(position)
+        holder?.title?.text = book.title
+        Glide.with(mContext).load(book.cover).into(holder?.image)
+        holder?.author_type?.text = "${book.author}/${book.type}"
+        holder?.intro?.text = book.intro
+        if (holder != null) {
+            setItemEvents(holder)
+        }
     }
 
 
     class ViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
         var title: TextView? = itemView?.findViewById(R.id.item_list_title)
         var image: ImageView? = itemView?.findViewById(R.id.item_list_image)
-        var description: TextView? = itemView?.findViewById(R.id.item_list_description)
-
+        var author_type: TextView? = itemView?.findViewById(R.id.item_list_author_type)
+        var intro: TextView? = itemView?.findViewById(R.id.item_list_intro)
     }
 
-    private fun getChannel(): ArrayList<Channel> {
-        val channels: ArrayList<Channel> = ArrayList<Channel>()
-        channels.add(Channel("小说排行榜", "http://www.biqukan.com/files/article/image/20/20623/20623s.jpg", context.getString(R.string.intro_ranking)))
-        channels.add(Channel("玄幻小说", "http://www.biqukan.com/files/article/image/1/1094/1094s.jpg", context.getString(R.string.intro_fantasy)))
-        channels.add(Channel("修真小说", "http://www.biqukan.com/files/article/image/3/3313/3313s.jpg", context.getString(R.string.intro_xiuzhen)))
-        channels.add(Channel("都市小说", "http://www.biqukan.com/files/article/image/24/24527/24527s.jpg", context.getString(R.string.intro_city)))
-        channels.add(Channel("穿越小说", "http://www.biqukan.com/files/article/image/20/20882/20882s.jpg", context.getString(R.string.intro_through)))
-        channels.add(Channel("网游小说", "http://www.biqukan.com/files/article/image/2/2675/2675s.jpg", context.getString(R.string.intro_game)))
-        channels.add(Channel("科幻小说", "http://www.biqukan.com/files/article/image/16/16516/16516s.jpg", context.getString(R.string.intro_science)))
-        channels.add(Channel("其他小说", "http://www.biqukan.com/files/article/image/17/17366/17366s.jpg", context.getString(R.string.intro_other)))
-        channels.add(Channel("完本小说", "http://www.biqukan.com/files/article/image/3/3037/3037s.jpg", context.getString(R.string.intro_end)))
-        return channels
+    fun listener(listener: OnItemClickListener): BookSearchAdapter {
+        this.listener = listener
+        return this
+    }
+
+    fun setItemEvents(holder: ViewHolder) {
+        if (listener != null) {
+            holder.itemView.setOnClickListener {
+                val layoutPosition = holder.layoutPosition
+                listener?.onItemClick(holder.itemView, layoutPosition)
+            }
+        }
+    }
+
+    fun refresh(data: List<Book>) {
+        this.data = data
+        notifyDataSetChanged()
     }
 }

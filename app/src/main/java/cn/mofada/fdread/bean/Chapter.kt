@@ -1,6 +1,23 @@
 package cn.mofada.fdread.bean
 
+import org.litepal.crud.DataSupport
+import java.io.Serializable
+
 /**
  * Created by fada on 2017/6/11.
  */
-data class Book(var title:String,var bookId:String,var author:String,var image:String,var detail :String,var update:String)
+/**
+ * "title": "第846章 冥皇继位",
+"previous": "/1_1094/14692242.html",
+"list": "/1_1094/",
+"next": "/1_1094/",
+"content":
+ */
+data class Chapter(
+        var title: String,
+        var chapterId: String,
+        var previous: String,
+        var list: String,
+        var next: String,
+        var content: String
+) : Serializable, DataSupport()

@@ -5,16 +5,16 @@
     <group
         android:checkableBehavior="single">
         <item
-            android:icon="@mipmap/ic_launcher"
-            android:title="test"/>
+            android:id="@+id/menu_item_user"
+            android:icon="@drawable/ic_user"
+            android:title="个人中心"/>
         <item
-            android:icon="@mipmap/ic_launcher"
-            android:title="test"/>
+            android:id="@+id/menu_item_set"
+            android:icon="@drawable/ic_setting"
+            android:title="设置"/>
         <item
-            android:icon="@mipmap/ic_launcher"
-            android:title="test"/>
-        <item
-            android:icon="@mipmap/ic_launcher"
-            android:title="test"/>
+            android:id="@+id/menu_item_loading"
+            android:icon="@drawable/ic_loading"
+            android:title="加载动画"/>
     </group>
 </menu>

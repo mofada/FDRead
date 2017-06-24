@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_item_book_shelf"
+        android:icon="@drawable/ic_book_sheif"
+        android:title="书架"/>
+    <item
+        android:id="@+id/menu_item_book_store"
+        android:icon="@drawable/ic_book_store"
+        android:title="书城"/>
+    <item
+        android:id="@+id/menu_item_discuss"
+        android:icon="@drawable/ic_book_discuss"
+        android:title="讨论"/>
 </menu>

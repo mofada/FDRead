@@ -8,15 +8,16 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import cn.mofada.fdread.R
-import com.bumptech.glide.Glide
-import cn.mofada.fdread.bean.Book
+import cn.mofada.fdread.bean.Chapter
+import org.litepal.crud.DataSupport
 
 /**
  * Created by fada on 2017/6/11.
  */
-class BookAdapter(var data: List<Book>) : RecyclerView.Adapter<BookAdapter.ViewHolder>() {
+class BookChapterAdapter(var data: List<Chapter>) : RecyclerView.Adapter<BookChapterAdapter.ViewHolder>() {
     var mContext: Context? = null
     var listener: OnItemClickListener? = null
+    var isOrder: Boolean = true
 
     override fun getItemCount(): Int = data.size
 
@@ -24,44 +25,46 @@ class BookAdapter(var data: List<Book>) : RecyclerView.Adapter<BookAdapter.ViewH
         if (mContext == null) {
             mContext = parent?.context
         }
-        var view: View = LayoutInflater.from(mContext).inflate(R.layout.item_grid_book, parent, false)
+        var view: View = LayoutInflater.from(mContext).inflate(R.layout.item_list_chapter, parent, false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-        val book: Book = data.get(position)
-        holder?.title?.text = book.title
-        Glide.with(mContext).load(book.image).into(holder?.image)
-        holder?.update?.text = "更新至:${book.update}"
+        val chapter: Chapter = data.get(position)
+        holder?.title?.text = chapter.title
+        val chapters: List<Chapter> = DataSupport.where("chapterId = '${chapter.chapterId}'").find(Chapter::class.java)
+        if (chapters.isNotEmpty()) holder?.done?.visibility = View.VISIBLE
         if (holder != null) {
             setItemEvents(holder)
         }
     }
 
-
     class ViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
-        var title: TextView? = itemView?.findViewById(R.id.item_grid_title)
-        var image: ImageView? = itemView?.findViewById(R.id.item_grid_image)
-        var update: TextView? = itemView?.findViewById(R.id.item_grid_update)
+        var title: TextView? = itemView?.findViewById(R.id.item_list_title)
+        var done: ImageView? = itemView?.findViewById(R.id.item_list_done)
     }
 
-    fun listener(listener: OnItemClickListener): BookAdapter {
+    fun listener(listener: OnItemClickListener) {
         this.listener = listener
-        return this
+    }
+
+    fun refresh(data: List<Chapter>) {
+        this.data = data
+        notifyDataSetChanged()
+    }
+
+    fun reversed() {
+        isOrder = !isOrder
+        data = data.reversed()
+        notifyDataSetChanged()
     }
 
     fun setItemEvents(holder: ViewHolder) {
         if (listener != null) {
-            holder.itemView.setOnClickListener(View.OnClickListener {
+            holder.itemView.setOnClickListener {
                 val layoutPosition = holder.getLayoutPosition()
                 listener?.onItemClick(holder.itemView, layoutPosition)
-            })
-
-            holder.itemView.setOnLongClickListener(View.OnLongClickListener {
-                val layoutPosition = holder.getLayoutPosition()
-                listener?.onItemLongClick(holder.itemView, layoutPosition)
-                false
-            })
+            }
         }
     }
 }
