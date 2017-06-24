@@ -1,5 +1,5 @@
 # FDRead
- 
+
 2017/6/25 上午4:31:52
 
 2017年上学期 期末项目（大二 下学期）
@@ -7,7 +7,7 @@
 采用 kotlin 语言编写的一款小说阅读器,该项目唯一的遗憾就是未实现小说的翻页效果，如果有会的大神，请多多指教，谢谢
 
 apk下载:[下载链接](https://github.com/mofada/FDRead/blob/master/apk/FDRead.apk?raw=true "apk")
- 
+
 界面如下：
 
 ![闪屏](https://github.com/mofada/FDRead/blob/master/images/splash.png "闪屏")
