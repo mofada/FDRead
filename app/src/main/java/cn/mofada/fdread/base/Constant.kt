@@ -25,16 +25,22 @@ package cn.mofada.fdread.base
  */
 class Constant {
     companion object {
+        //动画名称
         var INDICATOR: String = "INDICATOR"
 
+        //广播-登录
         var ACTION_LOGININ: String = "ACTION_LOGININ"
+        //广播-登出
         var ACTION_LOGINOUT: String = "ACTION_LOGINOUT"
+        //广播-书籍添加
         var ACTION_BOOKADD: String = "ACTION_BOOKADD"
 
+        //广播参数
         var USER_ICONURL: String = "iconurl"
         var USER_NAME: String = "name"
         var USER_UID: String = "uid"
 
+        //SharedPreference存储键值
         var PREFERS_UID: String = "uid"
         var PREFERS_NAME: String = "name"
         var PREFERS_ICONURL: String = "iconurl"
@@ -52,10 +58,13 @@ class Constant {
         var PREFERS_CHANNEL_7: String = "PREFERS_CHANNEL_7"
         var PREFERS_CHANNEL_8: String = "PREFERS_CHANNEL_8"
 
+        //字体大小
         var READ_TEXT_SIZE: String = "textSize"
 
+        //背景色
         var READ_BACKGROUND: String = "background"
 
+        //通知id
         var NOTIFICATION_ID: Int = 0xfd
 
         fun getChannel(type: Int): String = "PREFERS_CHANNEL_$type"

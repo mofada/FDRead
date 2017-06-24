@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide
 
 /**
  * Created by fada on 2017/6/11.
+ * 推荐适配器
  */
 class BookHorizontalAdapter(var data: List<Book>) : RecyclerView.Adapter<BookHorizontalAdapter.ViewHolder>() {
     var mContext: Context? = null
@@ -24,12 +25,12 @@ class BookHorizontalAdapter(var data: List<Book>) : RecyclerView.Adapter<BookHor
         if (mContext == null) {
             mContext = parent?.context
         }
-        var view: View = LayoutInflater.from(mContext).inflate(R.layout.item_grid_book_recommend, parent, false)
+        val view: View = LayoutInflater.from(mContext).inflate(R.layout.item_grid_book_recommend, parent, false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-        val book: Book = data.get(position)
+        val book: Book = data[position]
         holder?.title?.text = book.title
         Glide.with(mContext).load(book.cover).into(holder?.image)
         holder?.detail?.text = book.intro
@@ -44,10 +45,10 @@ class BookHorizontalAdapter(var data: List<Book>) : RecyclerView.Adapter<BookHor
 
     fun setItemEvents(holder: ViewHolder) {
         if (listener != null) {
-            holder.itemView.setOnClickListener(View.OnClickListener {
+            holder.itemView.setOnClickListener {
                 val layoutPosition = holder.getLayoutPosition()
                 listener?.onItemClick(holder.itemView, layoutPosition)
-            })
+            }
         }
     }
 

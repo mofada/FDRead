@@ -23,7 +23,6 @@ import cn.mofada.fdread.gson.GsonBook
 import cn.mofada.fdread.gson.Line
 import cn.mofada.fdread.retrofit.RetrofitServices
 import cn.mofada.fdread.service.DownLoadService
-import cn.mofada.fdread.utils.LogUtils
 import cn.mofada.fdread.utils.PrefersUtils
 import cn.mofada.fdread.utils.ToastUtils
 import com.bumptech.glide.Glide
@@ -130,9 +129,6 @@ class BookDetailActivity : AppCompatActivity() {
 
         book_download.isEnabled = true
 
-        LogUtils.d("chapters" + chapters.size)
-        LogUtils.d("adapter" + adapter?.data?.size)
-
         if (chapters.size + 5 >= adapter?.data?.size!!) {
             book_download.isEnabled = false
             book_download.text = "已缓存"
@@ -145,13 +141,9 @@ class BookDetailActivity : AppCompatActivity() {
             val json: String = getJsonByBook(book!!)
 
             RetrofitServices.getInstance().getRetrofitAndGson().book_insert(json).enqueue(object : Callback<Line> {
-                override fun onResponse(call: Call<Line>?, response: Response<Line>?) {
-                    LogUtils.d("book_insert onResponse" + response?.body().toString())
-                }
+                override fun onResponse(call: Call<Line>?, response: Response<Line>?) {}
 
-                override fun onFailure(call: Call<Line>?, t: Throwable?) {
-                    LogUtils.d("book_insert onFailure" + t?.message!!)
-                }
+                override fun onFailure(call: Call<Line>?, t: Throwable?) {}
             })
         }
     }
@@ -243,13 +235,9 @@ class BookDetailActivity : AppCompatActivity() {
             val json: String = getJsonByBook(book!!)
 
             RetrofitServices.getInstance().getRetrofitAndGson().book_update(json).enqueue(object : Callback<Line> {
-                override fun onResponse(call: Call<Line>?, response: Response<Line>?) {
-//                    LogUtils.d("book_update onResponse" + response?.body().toString())
-                }
+                override fun onResponse(call: Call<Line>?, response: Response<Line>?) {}
 
-                override fun onFailure(call: Call<Line>?, t: Throwable?) {
-//                    LogUtils.d("book_update onFailure" + t?.message!!)
-                }
+                override fun onFailure(call: Call<Line>?, t: Throwable?) {}
 
             })
         }

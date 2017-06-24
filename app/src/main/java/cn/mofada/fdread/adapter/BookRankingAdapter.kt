@@ -11,6 +11,7 @@ import cn.mofada.fdread.bean.Book
 
 /**
  * Created by fada on 2017/6/11.
+ * 排行榜
  */
 class BookRankingAdapter(var data: List<Book>) : RecyclerView.Adapter<BookRankingAdapter.ViewHolder>() {
     var mContext: Context? = null
@@ -49,10 +50,10 @@ class BookRankingAdapter(var data: List<Book>) : RecyclerView.Adapter<BookRankin
 
     fun setItemEvents(holder: ViewHolder) {
         if (listener != null) {
-            holder.itemView.setOnClickListener(View.OnClickListener {
-                val layoutPosition = holder.getLayoutPosition()
+            holder.itemView.setOnClickListener{
+                val layoutPosition = holder.layoutPosition
                 listener?.onItemClick(holder.itemView, layoutPosition)
-            })
+            }
         }
     }
 }

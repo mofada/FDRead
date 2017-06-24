@@ -15,7 +15,6 @@ import cn.mofada.fdread.bean.Book
 import cn.mofada.fdread.dialog.LoadingDialog
 import cn.mofada.fdread.gson.Line
 import cn.mofada.fdread.retrofit.RetrofitServices
-import cn.mofada.fdread.utils.LogUtils
 import cn.mofada.fdread.utils.PrefersUtils
 import com.bumptech.glide.Glide
 import com.mcxtzhang.swipemenulib.SwipeMenuLayout
@@ -58,7 +57,7 @@ class UserActivity : AppCompatActivity() {
         recycleView_user.adapter = adapter
         recycleView_user.layoutManager = GridLayoutManager(this, 3)
         recycleView_user.itemAnimator = DefaultItemAnimator()
-        recycleView_user.setOnTouchListener { view, event ->
+        recycleView_user.setOnTouchListener { _, event ->
             if (event.action == MotionEvent.ACTION_UP) {
                 val viewCache = SwipeMenuLayout.getViewCache()
                 viewCache?.smoothClose()
@@ -123,7 +122,7 @@ class UserActivity : AppCompatActivity() {
         UMShareAPI.get(this).deleteOauth(this, SHARE_MEDIA.QQ, authListener)
         val intent: Intent = Intent(Constant.ACTION_LOGINOUT)
         this.sendBroadcast(intent)
-        user_name.text = "your name"
+        user_name.text = "name"
         user_iconurl.setImageResource(R.mipmap.png_user)
         toolbar_user.setImageResource(R.mipmap.png_user)
 
@@ -139,7 +138,6 @@ class UserActivity : AppCompatActivity() {
 
         override fun onError(platform: SHARE_MEDIA, action: Int, t: Throwable) {
             dialog?.dismiss()
-            LogUtils.d("onError" + t.message)
             Toast.makeText(this@UserActivity, "目前只支持QQ登录，请安装QQ客户端后重试", Toast.LENGTH_LONG).show()
         }
 
@@ -189,28 +187,17 @@ class UserActivity : AppCompatActivity() {
         book.uid = uid
         val json = BookDetailActivity.getJsonByBook(book)
         RetrofitServices.getInstance().getRetrofitAndGson().book_insert(json).enqueue(object : Callback<Line> {
-            override fun onFailure(call: Call<Line>?, t: Throwable?) {
-                LogUtils.d("User book_insert onFailure" + t?.message)
-            }
+            override fun onFailure(call: Call<Line>?, t: Throwable?) {}
 
-            override fun onResponse(call: Call<Line>?, response: Response<Line>?) {
-                LogUtils.d("user book_insert onResponse" + response?.message())
-
-            }
+            override fun onResponse(call: Call<Line>?, response: Response<Line>?) {}
         })
     }
 
     private fun getBookByUid(uid: String) {
-        LogUtils.d("getBookByUid:" + uid)
-
         RetrofitServices.getInstance().getRetrofitAndGson().book_query(uid).enqueue(object : Callback<List<Book>> {
-            override fun onFailure(call: Call<List<Book>>?, t: Throwable?) {
-                LogUtils.d("user book_query onFailure" + t?.message)
-
-            }
+            override fun onFailure(call: Call<List<Book>>?, t: Throwable?) {}
 
             override fun onResponse(call: Call<List<Book>>?, response: Response<List<Book>>?) {
-                LogUtils.d("user book_query onResponse" + response?.message())
                 val books: List<Book> = response?.body()!!
                 for (book in books) {
                     book.saveOrUpdate("bookId = '${book.bookId}'")

@@ -11,6 +11,7 @@ import kotlinx.android.synthetic.main.dialog_input.*
 
 /**
  * Created by fada on 2017/6/16.
+ * 讨论框
  */
 class DiscussDialog(context: Context?, themeResId: Int) : Dialog(context, themeResId) {
     var listener: onClick? = null

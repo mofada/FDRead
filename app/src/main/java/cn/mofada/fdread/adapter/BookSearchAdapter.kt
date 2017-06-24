@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide
 
 /**
  * Created by fada on 2017/6/11.
+ * 搜索
  */
 class BookSearchAdapter(var data: List<Book>) : RecyclerView.Adapter<BookSearchAdapter.ViewHolder>() {
     var mContext: Context? = null
@@ -29,7 +30,7 @@ class BookSearchAdapter(var data: List<Book>) : RecyclerView.Adapter<BookSearchA
     }
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-        val book: Book = data.get(position)
+        val book: Book = data[position]
         holder?.title?.text = book.title
         Glide.with(mContext).load(book.cover).into(holder?.image)
         holder?.author_type?.text = "${book.author}/${book.type}"

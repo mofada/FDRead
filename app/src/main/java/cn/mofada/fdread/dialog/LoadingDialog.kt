@@ -12,6 +12,7 @@ import kotlinx.android.synthetic.main.dialog_loading.*
 
 /**
  * Created by fada on 2017/6/16.
+ * 加载框
  */
 class LoadingDialog(context: Context?, themeResId: Int) : Dialog(context, themeResId) {
     override fun onCreate(savedInstanceState: Bundle?) {

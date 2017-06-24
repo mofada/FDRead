@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.activity_splash.*
 /**
  * 闪屏
  */
-class SplashActivity : AppCompatActivity () {
+class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
@@ -20,19 +20,16 @@ class SplashActivity : AppCompatActivity () {
          */
         val valueAnimator: ValueAnimator = ValueAnimator.ofFloat(1F, 0.5F)
         valueAnimator.addListener(object : Animator.AnimatorListener {
-            override fun onAnimationRepeat(p0: Animator?) {
-            }
+            override fun onAnimationRepeat(p0: Animator?) {}
 
             override fun onAnimationEnd(p0: Animator?) {
                 MainActivity.startActivity(this@SplashActivity)
                 finish()
             }
 
-            override fun onAnimationCancel(p0: Animator?) {
-            }
+            override fun onAnimationCancel(p0: Animator?) {}
 
-            override fun onAnimationStart(p0: Animator?) {
-            }
+            override fun onAnimationStart(p0: Animator?) {}
         })
         valueAnimator.addUpdateListener {
             relative.alpha = it.animatedValue as Float

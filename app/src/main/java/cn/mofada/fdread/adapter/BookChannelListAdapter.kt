@@ -27,7 +27,7 @@ class BookChannelListAdapter(var data: List<Book>) : RecyclerView.Adapter<BookCh
     }
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-        val book: Book = data.get(position)
+        val book: Book = data[position]
         holder?.time?.text = book.time
         holder?.title_author?.text = "${book.title}/${book.author}"
         holder?.update?.text = book.update_
@@ -54,7 +54,7 @@ class BookChannelListAdapter(var data: List<Book>) : RecyclerView.Adapter<BookCh
     fun setItemEvents(holder: ViewHolder) {
         if (listener != null) {
             holder.itemView.setOnClickListener {
-                val layoutPosition = holder.getLayoutPosition()
+                val layoutPosition = holder.layoutPosition
                 listener?.onItemClick(holder.itemView, layoutPosition)
             }
         }

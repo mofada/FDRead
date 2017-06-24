@@ -5,13 +5,12 @@ import java.io.Serializable
 
 /**
  * Created by fada on 2017/6/11.
- */
-/**
- * "title": "第846章 冥皇继位",
+章节
+ * {"title": "第846章 冥皇继位",
 "previous": "/1_1094/14692242.html",
 "list": "/1_1094/",
 "next": "/1_1094/",
-"content":
+"content":"……"}
  */
 data class Chapter(
         var title: String,

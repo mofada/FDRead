@@ -13,7 +13,6 @@ import cn.mofada.fdread.dialog.LoadingDialog
 import cn.mofada.fdread.gson.Line
 import cn.mofada.fdread.retrofit.RetrofitServices
 import cn.mofada.fdread.utils.DisplayUtil
-import cn.mofada.fdread.utils.LogUtils
 import cn.mofada.fdread.utils.PrefersUtils
 import cn.mofada.fdread.utils.ToastUtils
 import kotlinx.android.synthetic.main.activity_book_read.*
@@ -48,18 +47,6 @@ class BookReadActivity : AppCompatActivity() {
         setActionVisibility()
 
         refresh(chapter?.chapterId!!)
-//        val chapters: List<Chapter> = DataSupport.where("chapterId = '${chapter?.chapterId!!}'").find(Chapter::class.java)
-//        if (chapters.isNotEmpty()) {
-//            chapter = chapters[0]
-//            if (TextUtils.isEmpty(chapter?.next)) {
-//                refresh(chapter?.chapterId!!)
-//            } else {
-//                onFinish()
-//            }
-//        } else {
-//            refresh(chapter?.chapterId!!)
-//        }
-
 
         /**
          * 设置字体 -
@@ -96,7 +83,6 @@ class BookReadActivity : AppCompatActivity() {
 
         chapter_color_bg_5.setOnClickListener {
             setBackground(R.color.read_theme_five)
-//            chapter_content.setTextColor(Color.parseColor("#323431"))
         }
 
         chapter_color_bg_night.setOnClickListener {
@@ -158,7 +144,6 @@ class BookReadActivity : AppCompatActivity() {
     fun setBackground(colorId: Int) {
         PrefersUtils.putInt(Constant.READ_BACKGROUND, colorId)
         layout.setBackgroundResource(colorId)
-//        chapter_title.setBackgroundResource(colorId)
     }
 
     /**
@@ -243,11 +228,9 @@ class BookReadActivity : AppCompatActivity() {
             val json: String = BookDetailActivity.getJsonByBook(book)
 
             RetrofitServices.getInstance().getRetrofitAndGson().book_update(json).enqueue(object : Callback<Line> {
-                override fun onResponse(call: Call<Line>?, response: Response<Line>?) {
-                }
+                override fun onResponse(call: Call<Line>?, response: Response<Line>?) {}
 
-                override fun onFailure(call: Call<Line>?, t: Throwable?) {
-                }
+                override fun onFailure(call: Call<Line>?, t: Throwable?) {}
             })
         }
     }

@@ -13,6 +13,7 @@ import org.litepal.crud.DataSupport
 
 /**
  * Created by fada on 2017/6/11.
+ * 小说章节适配器
  */
 class BookChapterAdapter(var data: List<Chapter>) : RecyclerView.Adapter<BookChapterAdapter.ViewHolder>() {
     var mContext: Context? = null
@@ -25,12 +26,12 @@ class BookChapterAdapter(var data: List<Chapter>) : RecyclerView.Adapter<BookCha
         if (mContext == null) {
             mContext = parent?.context
         }
-        var view: View = LayoutInflater.from(mContext).inflate(R.layout.item_list_chapter, parent, false)
+        val view: View = LayoutInflater.from(mContext).inflate(R.layout.item_list_chapter, parent, false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-        val chapter: Chapter = data.get(position)
+        val chapter: Chapter = data[position]
         holder?.title?.text = chapter.title
         val chapters: List<Chapter> = DataSupport.where("chapterId = '${chapter.chapterId}'").find(Chapter::class.java)
         if (chapters.isNotEmpty()) holder?.done?.visibility = View.VISIBLE
@@ -62,7 +63,7 @@ class BookChapterAdapter(var data: List<Chapter>) : RecyclerView.Adapter<BookCha
     fun setItemEvents(holder: ViewHolder) {
         if (listener != null) {
             holder.itemView.setOnClickListener {
-                val layoutPosition = holder.getLayoutPosition()
+                val layoutPosition = holder.layoutPosition
                 listener?.onItemClick(holder.itemView, layoutPosition)
             }
         }

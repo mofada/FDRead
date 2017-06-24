@@ -16,7 +16,6 @@ import cn.mofada.fdread.bean.Book
 import cn.mofada.fdread.bean.Chapter
 import cn.mofada.fdread.gson.Line
 import cn.mofada.fdread.retrofit.RetrofitServices
-import cn.mofada.fdread.utils.LogUtils
 import cn.mofada.fdread.utils.PrefersUtils
 import com.bumptech.glide.Glide
 import org.litepal.crud.DataSupport
@@ -26,6 +25,7 @@ import retrofit2.Response
 
 /**
  * Created by fada on 2017/6/11.
+ * 书架书籍适配器
  */
 class BookAdapter(var data: ArrayList<Book>) : RecyclerView.Adapter<BookAdapter.ViewHolder>() {
     var mContext: Context? = null
@@ -37,12 +37,12 @@ class BookAdapter(var data: ArrayList<Book>) : RecyclerView.Adapter<BookAdapter.
         if (mContext == null) {
             mContext = parent?.context
         }
-        var view: View = LayoutInflater.from(mContext).inflate(R.layout.item_grid_book, parent, false)
+        val view: View = LayoutInflater.from(mContext).inflate(R.layout.item_grid_book, parent, false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-        val book: Book = data.get(position)
+        val book: Book = data[position]
         holder?.title?.text = book.title
         Glide.with(mContext).load(book.cover).into(holder?.image)
         if (TextUtils.isEmpty(book.currChapter)) {
@@ -72,44 +72,49 @@ class BookAdapter(var data: ArrayList<Book>) : RecyclerView.Adapter<BookAdapter.
         notifyDataSetChanged()
     }
 
+    /**
+     * 设置事件
+     */
     fun setItemEvents(holder: ViewHolder) {
         if (listener != null) {
-            holder.card?.setOnClickListener(View.OnClickListener {
-                val layoutPosition = holder.getLayoutPosition()
+            holder.card?.setOnClickListener {
+                val layoutPosition = holder.layoutPosition
                 listener?.onItemClick(holder.card!!, layoutPosition)
-            })
+            }
 
             holder.delete?.setOnClickListener {
-                val layoutPosition = holder.getLayoutPosition()
+                val layoutPosition = holder.layoutPosition
                 listener?.onRemoveClick(holder.delete!!, layoutPosition)
             }
         }
     }
 
+    /**
+     * 事件接口
+     */
     interface OnClickListener : OnItemClickListener {
         fun onRemoveClick(view: View, position: Int)
 
         override fun onItemClick(view: View, position: Int)
     }
 
+    /**
+     * 移除指定位置
+     * @position 位置
+     */
     fun remove(position: Int) {
 //        DataSupport.delete(Book::class.java, data[position].id)
         val book: Book = data[position]
-        LogUtils.d(book.toString())
         book.deleteAsync().listen {
             data.removeAt(position)
             notifyItemRemoved(position)
-            DataSupport.deleteAll(Chapter::class.java,"list = '${book.bookId}'")
+            DataSupport.deleteAll(Chapter::class.java, "list = '${book.bookId}'")
             if (PrefersUtils.getBoolean(Constant.PREFERS_ISLOGIN)) {
                 book.uid = PrefersUtils.getString(Constant.PREFERS_UID)
                 RetrofitServices.getInstance().getRetrofitAndGson().book_delete(book.uid, book.bookId).enqueue(object : Callback<Line> {
-                    override fun onResponse(call: Call<Line>?, response: Response<Line>?) {
-                        LogUtils.d("book_delete onResponse" + response?.body().toString())
-                    }
+                    override fun onResponse(call: Call<Line>?, response: Response<Line>?) {}
 
-                    override fun onFailure(call: Call<Line>?, t: Throwable?) {
-                        LogUtils.d("book_delete onFailure" + t?.message!!)
-                    }
+                    override fun onFailure(call: Call<Line>?, t: Throwable?) {}
                 })
             }
         }

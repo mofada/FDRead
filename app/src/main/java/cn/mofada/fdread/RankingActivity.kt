@@ -46,11 +46,9 @@ class RankingActivity : AppCompatActivity() {
         tablayout.addTab(tablayout.newTab().setText("科幻小说"))
         tablayout.addTab(tablayout.newTab().setText("其他小说"))
         tablayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabReselected(tab: TabLayout.Tab?) {
-            }
+            override fun onTabReselected(tab: TabLayout.Tab?) {}
 
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
-            }
+            override fun onTabUnselected(tab: TabLayout.Tab?) {}
 
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 setContent(tab?.position!!)

@@ -18,6 +18,7 @@ import kotlinx.android.synthetic.main.dialog_set_loading.*
 
 /**
  * Created by fada on 2017/6/16.
+ * 设置动画框
  */
 class SetLoadingDialog(context: Context?, themeResId: Int) : Dialog(context, themeResId) {
     override fun onCreate(savedInstanceState: Bundle?) {

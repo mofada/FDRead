@@ -66,7 +66,6 @@ class MainActivity : AppCompatActivity() {
                 R.id.menu_item_user -> startUse()
                 R.id.menu_item_loading -> showLoadingSet()
             }
-
             true
         }
 
@@ -137,8 +136,7 @@ class MainActivity : AppCompatActivity() {
         bookDiscussFragment.loginOut()
         bookStoreFragment.loginOut()
         Glide.with(this).load(R.mipmap.png_user).into(user_icon)
-//        user_icon.setImageResource(R.mipmap.png_user)
-        user_name.text = "your name"
+        user_name.text = "name"
     }
 
     fun addBook() {

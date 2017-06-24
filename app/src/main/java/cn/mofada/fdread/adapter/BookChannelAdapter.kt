@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide
 
 /**
  * Created by fada on 2017/6/11.
+ * 书籍分类适配器
  */
 class BookChannelAdapter(var context: Context) : RecyclerView.Adapter<BookChannelAdapter.ViewHolder>() {
     var mContext: Context? = null
@@ -25,12 +26,12 @@ class BookChannelAdapter(var context: Context) : RecyclerView.Adapter<BookChanne
         if (mContext == null) {
             mContext = parent?.context
         }
-        var view: View = LayoutInflater.from(mContext).inflate(R.layout.item_list_channel, parent, false)
+        val view: View = LayoutInflater.from(mContext).inflate(R.layout.item_list_channel, parent, false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-        val channel: Channel = channels.get(position)
+        val channel: Channel = channels[position]
         holder?.title?.text = channel.title
         Glide.with(mContext).load(channel.cover).into(holder?.image)
         holder?.description?.text = channel.descriptor
@@ -68,7 +69,7 @@ class BookChannelAdapter(var context: Context) : RecyclerView.Adapter<BookChanne
     fun setItemEvents(holder: ViewHolder) {
         if (listener != null) {
             holder.itemView.setOnClickListener {
-                val layoutPosition = holder.getLayoutPosition()
+                val layoutPosition = holder.layoutPosition
                 listener?.onItemClick(holder.itemView, layoutPosition)
             }
         }

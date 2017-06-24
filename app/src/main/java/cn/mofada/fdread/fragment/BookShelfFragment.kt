@@ -59,7 +59,7 @@ class BookShelfFragment : Fragment() {
         recycleView_main.adapter = adapter
         recycleView_main.layoutManager = GridLayoutManager(activity, 3)
         recycleView_main.itemAnimator = DefaultItemAnimator()
-        recycleView_main.setOnTouchListener { view, event ->
+        recycleView_main.setOnTouchListener { _, event ->
             if (event.action == MotionEvent.ACTION_UP) {
                 val viewCache = SwipeMenuLayout.getViewCache()
                 viewCache?.smoothClose()

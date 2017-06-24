@@ -10,6 +10,7 @@ import com.wang.avi.AVLoadingIndicatorView
 
 /**
  * Created by fada on 2017/6/11.
+ * 加载动画
  */
 class LoadingDialogAdapter(var data: List<String>) : RecyclerView.Adapter<LoadingDialogAdapter.ViewHolder>() {
     var mContext: Context? = null
@@ -21,7 +22,7 @@ class LoadingDialogAdapter(var data: List<String>) : RecyclerView.Adapter<Loadin
         if (mContext == null) {
             mContext = parent?.context
         }
-        var view: View = LayoutInflater.from(mContext).inflate(R.layout.dialog_loading, parent, false)
+        val view: View = LayoutInflater.from(mContext).inflate(R.layout.dialog_loading, parent, false)
         return ViewHolder(view)
     }
 
